@@ -75,7 +75,8 @@ function getLabel(name) {
 // const fs = require('fs');
 // const path = require('path');
 
-const RESULT_DIR = '/Users/yifeiwang/Desktop/LLMBugScanner-2/GUI/public/result';
+const RESULT_DIR = path.join(__dirname, '../public/result/');
+
 let resultDB = {};
 
 // Function to recursively load files within a directory
