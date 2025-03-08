@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solidity Contracts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Contract Selection */
+        .selection-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+        }
+
+        select, .checkbox-group {
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .checkbox-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+            white-space: pre-wrap;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        /* Scrollable Table Cells */
+        .scrollable-content {
+            max-height: 200px;
+            overflow-y: auto;
+            overflow-x: auto;
+            word-wrap: break-word;
+        }
+
+        /* Solidity Code & Vulnerability Info */
+        .info-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+            width: 45%;
+            height: 300px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Solidity Contracts</h1>
+
+    <div class="main-container">
+        <label><strong>Select the contract, model result, experiment you want to visualize:</strong></label>
+
+        <!-- Selection Area -->
+        <div class="selection-container">
+            <!-- Contract Selection -->
+            <div>
+                <select id="contractList" size="5" onchange="showSelectedContract()">
+                    <% contracts.forEach((contract) => { %>
+                        <option value="<%= contract.name %>"><%= contract.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <!-- Model Selection -->
+            <div class="checkbox-group">
+                <label><strong>Select a model:</strong></label>
+                <label><input type="checkbox" name="model" value="codellama"> Codellama</label>
+                <label><input type="checkbox" name="model" value="deepseek"> Deepseek</label>
+                <label><input type="checkbox" name="model" value="gemma"> Gemma</label>
+                <label><input type="checkbox" name="model" value="nxcode"> Nxcode</label>
+                <label><input type="checkbox" name="model" value="opencodeinterpreter"> OpenCodeInterpreter</label>
+            </div>
+
+            <!-- Experiment Selection -->
+            <div class="checkbox-group">
+                <label><strong>Select an experiment:</strong></label>
+                <label><input type="checkbox" name="experiment" value="baseline"> Baseline</label>
+                <label><input type="checkbox" name="experiment" value="finetuned A"> Finetuned A</label>
+                <label><input type="checkbox" name="experiment" value="finetuned A+C"> Finetuned A+C</label>
+            </div>
+
+        </div>
+
+        <!-- Table Display -->
+        <table id="resultTable">
+            <thead>
+                <tr id="tableHeader">
+                    <th>Model/Experiment</th> <!-- Fixed top-left corner -->
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <!-- Solidity Code and Vulnerability Info -->
+        <div class="info-container">
+            <pre id="contractContent"><code></code></pre>
+            <pre id="vulnerabilityInfo"></pre>
+        </div>
+
+    </div>
+
+    <script src="/js/main_page.js"></script>
+
+</body>
+</html>
